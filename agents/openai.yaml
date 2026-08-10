@@ -1,0 +1,6 @@
+interface:
+  display_name: "Architecture Guardian"
+  short_description: "Guard architecture boundaries during coding"
+  default_prompt: "Use $architecture-guardian to analyze this change for architecture impact, dependency direction, and regression risk."
+policy:
+  allow_implicit_invocation: true

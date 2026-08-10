@@ -1,0 +1,82 @@
+{
+  "policy_version": "1.0.0",
+  "tooling": {
+    "modes": [
+      "PLAN",
+      "REVIEW",
+      "CHANGE-REVIEW",
+      "REFACTOR",
+      "FULL-AUDIT"
+    ]
+  },
+  "priority": [
+    "Encapsulation",
+    "LowCoupling",
+    "HighCohesion",
+    "ExplicitDependencies",
+    "SingleResponsibility",
+    "DependencyInversion",
+    "Testability",
+    "Maintainability",
+    "Extensibility",
+    "ImplementationConvenience"
+  ],
+  "mandatory_discovery_documents": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "README.md",
+    "docs/ARCHITECTURE.md",
+    "docs/CODING_STYLE.md",
+    "docs/MODULE_RULES.md",
+    "docs/DEPENDENCY_RULES.md",
+    "CONTRIBUTING.md"
+  ],
+  "required_check_categories": {
+    "high": [
+      "ModuleBoundaryViolation",
+      "LayerViolation",
+      "DirectFeatureImplementationDependency",
+      "CircularDependency",
+      "LeakedMutableState",
+      "InappropriatePublicAPIExposure",
+      "DependencyInversionViolation",
+      "OwnershipAmbiguity",
+      "UnexpectedContractChange",
+      "ConcurrencyRisk",
+      "LifecycleIssue"
+    ],
+    "medium": [
+      "ExcessiveCoupling",
+      "LowCohesion",
+      "DuplicatedResponsibility",
+      "OversizedObject",
+      "HiddenDependency",
+      "BroadInterface",
+      "SharedAbstractionDrift",
+      "CrossFeatureLogicDuplication",
+      "LowTestability"
+    ],
+    "low": [
+      "Naming",
+      "MinorInconsistency",
+      "LongFunctions",
+      "OverVisibility",
+      "SmallDuplication"
+    ]
+  },
+  "regression_gate": {
+    "must_test_when": [
+      "behavior_change",
+      "api_signature_change",
+      "state_transition_change",
+      "persistence_schema_change",
+      "concurrency_change",
+      "error_handling_change"
+    ]
+  },
+  "final_verdict": [
+    "PASS",
+    "PASS_WITH_WARNINGS",
+    "CHANGES_REQUIRED"
+  ]
+}
