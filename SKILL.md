@@ -9,6 +9,8 @@ Use this skill to keep a project's architecture stable while features, fixes, re
 
 Treat this file as the runtime entry point. Treat `core/policy/ARCHITECTURE_GUARDIAN_POLICY.md` as the authoritative policy reference.
 
+Canonical repository: `git@github.com:siamakerlab/architecture-guardian-skill.git`
+
 ## Operating Rule
 
 Prefer the project's explicit architecture rules over this skill's defaults. If project rules create severe risk such as circular dependencies, uncontrolled global state, data corruption, lifecycle hazards, concurrency hazards, API breakage, or boundary collapse, report the conflict instead of silently following it.
@@ -168,6 +170,29 @@ Required flow: PLAN before implementation, REVIEW during/after implementation, C
 Review results must include Architecture Impact, Scorecard, Findings, Tests Required, and Architecture Verdict.
 ```
 
+## Install Or Update
+
+When the user asks to install or update this skill, use the canonical repository as the source of truth.
+
+Default install target for Codex:
+
+```bash
+${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian
+```
+
+Update procedure:
+
+1. Locate the installed skill directory.
+2. If it is a git checkout, run `git remote -v` and confirm the repository is `git@github.com:siamakerlab/architecture-guardian-skill.git`.
+3. If the repository matches and local changes exist, report them before updating.
+4. If there are no local changes, run `git pull --ff-only`.
+5. If the installed copy is not a git checkout, replace it from a fresh clone of the canonical repository after preserving any local project-specific files outside the skill directory.
+6. Validate with `python3 <skill-creator>/scripts/quick_validate.py <skill-dir>` when that validator is available.
+
+Do not overwrite user-local modifications without explicit approval.
+
+For versioned installs or release maintenance, follow `VERSIONING.md`. Use git tags as the release source of truth. Do not add a version field to `SKILL.md` frontmatter.
+
 ## Resource Map
 
 - Core policy: `core/policy/ARCHITECTURE_GUARDIAN_POLICY.md`
@@ -176,3 +201,4 @@ Review results must include Architecture Impact, Scorecard, Findings, Tests Requ
 - Report template: `core/reports/ARCHITECTURE_GUARDIAN_REPORT.md`
 - Project document templates: `docs/`
 - Claude and Codex adapters: `adapters/`
+- Versioning policy: `VERSIONING.md`

@@ -105,7 +105,7 @@ Runtime skill package:
 
 - Required: [SKILL.md](SKILL.md), [agents](agents), [core](core)
 - Recommended: [adapters](adapters), [docs](docs), [examples](examples)
-- Repository-only documentation: [README.md](README.md), [MVP.md](MVP.md), [LICENSE](LICENSE)
+- Repository-only documentation: [README.md](README.md), [VERSIONING.md](VERSIONING.md), [MVP.md](MVP.md), [LICENSE](LICENSE)
 
 ## Codex Usage
 
@@ -127,6 +127,63 @@ Review results must include Architecture Impact, Scorecard, Findings, Tests Requ
 Adapter:
 
 - [adapters/codex/AGENTS.md](adapters/codex/AGENTS.md)
+
+## Install
+
+Canonical repository:
+
+```text
+git@github.com:siamakerlab/architecture-guardian-skill.git
+```
+
+Recommended Codex install path:
+
+```bash
+${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian
+```
+
+Install from GitHub:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+git clone git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+Validate after install:
+
+```bash
+python3 /path/to/skill-creator/scripts/quick_validate.py "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+## Update
+
+If the skill was installed as a git checkout:
+
+```bash
+cd "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+git status --short
+git pull --ff-only
+```
+
+If local changes exist, review them before pulling. Do not overwrite local modifications unless the user explicitly asks.
+
+Agent update request:
+
+```text
+Update $architecture-guardian from git@github.com:siamakerlab/architecture-guardian-skill.git and validate the skill.
+```
+
+## Versioning
+
+Releases are managed with git tags using `vMAJOR.MINOR.PATCH`.
+
+Do not add a release version field to `SKILL.md`; Codex skill frontmatter should stay limited to `name` and `description`.
+
+The machine-readable architecture policy has its own `policy_version` in [core/policy/ARCHITECTURE_GUARDIAN_RULESET.json](core/policy/ARCHITECTURE_GUARDIAN_RULESET.json). Change it only when policy semantics, scoring semantics, verdict rules, or rule identifiers change.
+
+Versioning policy:
+
+- [VERSIONING.md](VERSIONING.md)
 
 ## Claude Code Usage
 
