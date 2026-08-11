@@ -4,13 +4,18 @@ This project follows Semantic Versioning for release tags.
 
 ## Unreleased
 
-- Added GitHub Actions validation for public distribution.
-- Added public distribution guidance to `README.md`.
-- Clarified versioning and GitHub release policy.
+No unreleased changes.
+
+## v1.0.1
+
+Patch release for public distribution cleanup.
+
+- Excludes local Codex and Claude management files from the repository package.
+- Adds `.gitignore` rules for local `.codex/`, `.claude/`, `AGENTS.md`, and `CLAUDE.md`.
 
 ## v1.0.0
 
-Initial stable release target.
+Initial stable release.
 
 - Provides the Architecture Guardian runtime skill entry point.
 - Provides reusable architecture policy, mode templates, report template, and machine-readable ruleset.

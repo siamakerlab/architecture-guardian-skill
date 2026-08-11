@@ -169,7 +169,7 @@ Stable install:
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-git clone --branch v1.0.0 git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+git clone --branch v1.0.1 git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
 ```
 
 Install current main:
