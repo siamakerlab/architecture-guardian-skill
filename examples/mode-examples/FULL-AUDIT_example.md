@@ -6,6 +6,17 @@
 - API sprawl: `admin` 모듈에서 공용 API 3개 증가
 - shared/common bloat: `utils/formatting` 내 feature 의존 로직 혼재
 
+## Scorecard
+
+| Criterion | Score | Evidence |
+|---|---:|---|
+| Encapsulation | 5 | no cross-module state leak found |
+| Coupling | 3 | shared formatting contains feature-specific logic |
+| Cohesion | 3 | formatting responsibility is mixed across feature concerns |
+| Boundary Integrity | 5 | no reversed dependency or cycle found |
+| Contract Compatibility | 3 | admin public API increased by 3 entries |
+| Regression Safety | 2 | smoke regression required for shared formatting split |
+
 ## Findings
 
 - Severity: MEDIUM

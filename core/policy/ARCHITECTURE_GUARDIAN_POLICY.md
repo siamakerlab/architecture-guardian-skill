@@ -47,7 +47,7 @@ No lower-priority rule can override a higher-priority one.
 
 ## 4. Required Operating Modes
 Available modes: PLAN, REVIEW, CHANGE-REVIEW, REFACTOR, FULL-AUDIT.
-Each mode must emit `Architecture Guardian Report` format.
+Each mode must emit the required Architecture Guardian fields. Use the formal report template only when the user asks for a formal report or when the mode is REVIEW, CHANGE-REVIEW, REFACTOR, or FULL-AUDIT.
 
 ## 5. Mandatory Discovery Process
 Before change or review, inspect existing documents if present:
@@ -241,9 +241,64 @@ Ask explicitly:
 If answered negatively with evidence, proceed to report.
 
 ## 17. Reporting (required)
-Every output report must follow report template (Location, Problem, Risk, Recommendation, Regression Risk, Tests Required, Severity, and final verdict).
+Every output must include Architecture Impact, Findings when present, Regression Risk, Tests Required, and final verdict. REVIEW, CHANGE-REVIEW, REFACTOR, and FULL-AUDIT outputs must also include Scorecard. Formal reports must follow the report template.
 
-## 18. Mode requirements
+## 18. Scoring Policy
+
+Review modes must include an evidence-based scorecard. Scores are not subjective ratings; they are deterministic judgments from observed evidence.
+
+Allowed values:
+- `5`: Verified pass. Evidence shows no violation and the relevant test, contract, or enforcement boundary is present where applicable.
+- `4`: Pass. Evidence shows no violation, but enforcement or documentation is incomplete.
+- `3`: Warning. Evidence shows a localized weakness, but no boundary, contract, lifecycle, state ownership, or regression breakage.
+- `2`: Risk. Evidence shows material architecture risk or missing verification in a medium-risk affected area.
+- `1`: Serious risk. Evidence shows a localized violation or partial verification of a high-risk affected area.
+- `0`: Fail. Evidence shows a severe violation, or a high-risk affected area is unverified.
+- `N-A`: Not scored. The criterion is outside the scope of the reviewed change.
+
+Rules:
+- Do not use decimal values, percentages, confidence scores, or subjective estimates.
+- Every numeric score must cite concrete evidence.
+- If evidence is insufficient for an affected high-risk area, score `0`.
+- If an item is truly outside scope, score `N-A` and exclude it from totals.
+- Do not average scores into a single architecture score unless the user explicitly asks.
+- Any `0` or `1` in a required architecture criterion prevents `PASS`.
+- Any HIGH finding prevents `PASS`.
+
+Risk tier definitions:
+- High-risk affected area: area with a HIGH finding, regression risk HIGH, or change to public contract, state ownership, persistence format, concurrency behavior, lifecycle behavior, security boundary, or cross-feature dependency.
+- Medium-risk affected area: area with a MEDIUM finding, dependency broadening, public API growth, shared/common code growth, reduced testability, or unclear side effects.
+- Low-risk affected area: local implementation detail change with no boundary, contract, state, persistence, lifecycle, concurrency, or consumer impact.
+
+Default scorecard criteria:
+- Encapsulation
+- Coupling
+- Cohesion
+- Explicit Dependencies
+- Single Responsibility
+- Dependency Inversion
+- Testability
+- Boundary Integrity
+- Contract Compatibility
+- State and Lifecycle Ownership
+- Regression Safety
+- Abstraction Fit
+
+Score evidence matrix:
+- Encapsulation: `5` requires no exposed internals or leaked mutable state plus verified ownership boundary; `4` requires no exposed internals but boundary is documented only implicitly; `3` means minor visibility or access concern without consumer impact; `2` means implementation detail exposure risk; `1` means localized encapsulation violation; `0` means leaked mutable state, public internal implementation dependency, or unverified high-risk ownership boundary.
+- Coupling: `5` requires no new unnecessary dependency and dependency direction verified; `4` means no violation but enforcement is manual; `3` means localized dependency broadening; `2` means material coupling increase without boundary break; `1` means localized forbidden dependency; `0` means cross-feature implementation dependency or cycle.
+- Cohesion: `5` requires each changed unit has one clear responsibility; `4` means responsibility is clear but not documented; `3` means minor mixed responsibility; `2` means material responsibility mixing; `1` means localized duplicated ownership; `0` means God Class or severe unrelated responsibility aggregation.
+- Explicit Dependencies: `5` requires dependencies are constructor/config/import visible and contract-based where needed; `4` means visible dependencies but missing enforcement/documentation; `3` means minor implicit dependency; `2` means material hidden dependency risk; `1` means localized hidden dependency; `0` means service locator/global hidden dependency in affected path.
+- Single Responsibility: `5` requires no added unrelated responsibility; `4` means responsibility fit is clear but not documented; `3` means minor responsibility growth; `2` means material responsibility growth; `1` means localized SRP violation; `0` means severe responsibility aggregation.
+- Dependency Inversion: `5` requires high-level policy depends on contract, not implementation; `4` means correct direction but not enforced; `3` means minor adapter/contract ambiguity; `2` means material inversion risk; `1` means localized implementation dependency; `0` means high-level policy depends on infrastructure or feature implementation.
+- Testability: `5` requires deterministic logic and replaceable side effects with relevant tests; `4` means test seam exists but tests/enforcement incomplete; `3` means minor test friction; `2` means material testability risk; `1` means localized hard-to-test dependency; `0` means high-risk behavior cannot be tested or verified.
+- Boundary Integrity: `5` requires module/layer/feature boundaries remain intact and verified; `4` means intact but not automatically enforced; `3` means minor convention drift; `2` means material boundary pressure; `1` means localized boundary violation; `0` means module/layer violation, cycle, or cross-feature internal dependency.
+- Contract Compatibility: `5` requires public contract unchanged or backward-compatible with tests; `4` means compatible but tests/docs incomplete; `3` means minor compatible expansion; `2` means material compatibility risk; `1` means localized consumer migration risk; `0` means breaking public contract without migration.
+- State and Lifecycle Ownership: `5` requires clear owner and lifecycle with tests or enforcement where relevant; `4` means owner clear but not enforced/documented; `3` means minor ownership ambiguity; `2` means material ownership/lifecycle risk; `1` means localized duplicate ownership; `0` means leaked state, uncontrolled global mutable state, lifecycle hazard, or unverified high-risk state change.
+- Regression Safety: `5` requires affected regression tests or equivalent verification; `4` means test plan exists but not automated; `3` means low-risk change with limited verification; `2` means medium-risk change missing direct regression test; `1` means high-risk change partially verified; `0` means high-risk change unverified.
+- Abstraction Fit: `5` requires abstraction is necessary and bounded; `4` means abstraction fits but lacks documented rationale; `3` means minor abstraction uncertainty; `2` means speculative abstraction risk; `1` means localized unnecessary abstraction; `0` means abstraction hides boundary violation or creates broad coupling.
+
+## 19. Mode requirements
 - PLAN: pre-change planning with explicit architecture impact section.
 - REVIEW: detect violations in current implementation against local architecture.
 - CHANGE-REVIEW: analyze diff/commit/PR impact.
@@ -255,7 +310,7 @@ The report verdict must be:
 - PASS WITH WARNINGS
 - CHANGES REQUIRED
 
-## 19. Output Discipline
+## 20. Output Discipline
 
 모든 모드 출력은 판단에 필요한 정보만 포함한다. 목표는 축약 버전과 상세 버전을 나누는 것이 아니라, 처음부터 운영 가능한 기본 형식을 유지하는 것이다.
 
@@ -266,18 +321,4 @@ The report verdict must be:
 - LOW finding은 넓은 리팩터링의 근거로 사용하지 않는다.
 - 동일한 규칙을 여러 섹션에서 반복하지 않는다.
 - formal report가 필요한 경우에만 `core/reports/ARCHITECTURE_GUARDIAN_REPORT.md` 전체 형식을 사용한다.
-
-1. 필수 우선순위: `Architecture Impact` → `Findings` → `Tests Required` → `Verdict`
-2. finding 정리
-- HIGH: 모두 포함(필수)
-- MEDIUM: 중요도 높은 순으로 최대 10개
-- LOW: 기본 생략, `LOW findings omitted`로 요약 가능
-3. 형식 제한
-- Markdown table 또는 짧은 bullet 사용
-- each finding: 1~2줄로 축약
-4. 길이 제어
-- 핵심 근거 없이는 배경설명·장식 문장 금지
-- 동일 내용 반복 금지
-5. 품질 게이트
-- High가 하나라도 있으면 PASS 불가
-- High/MEDIUM은 사유를 짧게라도 반드시 명시
+- Quality gates: any HIGH finding blocks PASS; any HIGH or MEDIUM finding requires a concise reason.

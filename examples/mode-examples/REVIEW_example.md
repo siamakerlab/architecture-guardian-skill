@@ -3,6 +3,17 @@
 ## Scope
 - 대상: auth 모듈 서비스 계층
 
+## Scorecard
+
+| Criterion | Score | Evidence |
+|---|---:|---|
+| Encapsulation | 0 | `AuthOrchestrator` receives `UserRepositoryImpl` directly |
+| Coupling | 0 | auth feature depends on user feature implementation |
+| Cohesion | 3 | formatting and caching responsibility are mixed in shared utility without confirmed boundary breakage |
+| Explicit Dependencies | 2 | dependency exists but contract boundary is not explicit |
+| Dependency Inversion | 0 | implementation is injected instead of port/interface |
+| Regression Safety | 2 | adapter integration test is required before completion |
+
 ## Findings
 
 - Severity: HIGH

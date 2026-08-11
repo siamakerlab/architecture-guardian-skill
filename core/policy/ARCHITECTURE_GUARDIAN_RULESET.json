@@ -74,6 +74,165 @@
       "error_handling_change"
     ]
   },
+  "scorecard": {
+    "risk_tiers": {
+      "high_risk_affected_area": [
+        "HIGH finding",
+        "regression risk HIGH",
+        "public contract change",
+        "state ownership change",
+        "persistence format change",
+        "concurrency behavior change",
+        "lifecycle behavior change",
+        "security boundary change",
+        "cross-feature dependency change"
+      ],
+      "medium_risk_affected_area": [
+        "MEDIUM finding",
+        "dependency broadening",
+        "public API growth",
+        "shared/common code growth",
+        "reduced testability",
+        "unclear side effects"
+      ],
+      "low_risk_affected_area": [
+        "local implementation detail change with no boundary, contract, state, persistence, lifecycle, concurrency, or consumer impact"
+      ]
+    },
+    "allowed_scores": {
+      "5": "Verified pass: evidence shows no violation and the relevant test, contract, or enforcement boundary is present where applicable",
+      "4": "Pass: evidence shows no violation, but enforcement or documentation is incomplete",
+      "3": "Warning: localized weakness without boundary, contract, lifecycle, state ownership, or regression breakage",
+      "2": "Risk: material architecture risk or missing verification in a medium-risk affected area",
+      "1": "Serious risk: localized violation or partial verification of a high-risk affected area",
+      "0": "Fail: severe violation, or a high-risk affected area is unverified",
+      "N-A": "Not scored: outside review scope and excluded from totals"
+    },
+    "disallowed_scores": [
+      "decimal",
+      "percentage",
+      "confidence",
+      "subjective_estimate"
+    ],
+    "criteria": [
+      "Encapsulation",
+      "Coupling",
+      "Cohesion",
+      "ExplicitDependencies",
+      "SingleResponsibility",
+      "DependencyInversion",
+      "Testability",
+      "BoundaryIntegrity",
+      "ContractCompatibility",
+      "StateAndLifecycleOwnership",
+      "RegressionSafety",
+      "AbstractionFit"
+    ],
+    "evidence_matrix": {
+      "Encapsulation": {
+        "5": "No exposed internals or leaked mutable state plus verified ownership boundary",
+        "4": "No exposed internals but boundary is documented only implicitly",
+        "3": "Minor visibility or access concern without consumer impact",
+        "2": "Implementation detail exposure risk",
+        "1": "Localized encapsulation violation",
+        "0": "Leaked mutable state, public internal implementation dependency, or unverified high-risk ownership boundary"
+      },
+      "Coupling": {
+        "5": "No new unnecessary dependency and dependency direction verified",
+        "4": "No violation but enforcement is manual",
+        "3": "Localized dependency broadening",
+        "2": "Material coupling increase without boundary break",
+        "1": "Localized forbidden dependency",
+        "0": "Cross-feature implementation dependency or cycle"
+      },
+      "Cohesion": {
+        "5": "Each changed unit has one clear responsibility",
+        "4": "Responsibility is clear but not documented",
+        "3": "Minor mixed responsibility",
+        "2": "Material responsibility mixing",
+        "1": "Localized duplicated ownership",
+        "0": "God Class or severe unrelated responsibility aggregation"
+      },
+      "ExplicitDependencies": {
+        "5": "Dependencies are constructor/config/import visible and contract-based where needed",
+        "4": "Visible dependencies but missing enforcement/documentation",
+        "3": "Minor implicit dependency",
+        "2": "Material hidden dependency risk",
+        "1": "Localized hidden dependency",
+        "0": "Service locator/global hidden dependency in affected path"
+      },
+      "SingleResponsibility": {
+        "5": "No added unrelated responsibility",
+        "4": "Responsibility fit is clear but not documented",
+        "3": "Minor responsibility growth",
+        "2": "Material responsibility growth",
+        "1": "Localized SRP violation",
+        "0": "Severe responsibility aggregation"
+      },
+      "DependencyInversion": {
+        "5": "High-level policy depends on contract, not implementation",
+        "4": "Correct direction but not enforced",
+        "3": "Minor adapter/contract ambiguity",
+        "2": "Material inversion risk",
+        "1": "Localized implementation dependency",
+        "0": "High-level policy depends on infrastructure or feature implementation"
+      },
+      "Testability": {
+        "5": "Deterministic logic and replaceable side effects with relevant tests",
+        "4": "Test seam exists but tests/enforcement incomplete",
+        "3": "Minor test friction",
+        "2": "Material testability risk",
+        "1": "Localized hard-to-test dependency",
+        "0": "High-risk behavior cannot be tested or verified"
+      },
+      "BoundaryIntegrity": {
+        "5": "Module/layer/feature boundaries remain intact and verified",
+        "4": "Boundaries intact but not automatically enforced",
+        "3": "Minor convention drift",
+        "2": "Material boundary pressure",
+        "1": "Localized boundary violation",
+        "0": "Module/layer violation, cycle, or cross-feature internal dependency"
+      },
+      "ContractCompatibility": {
+        "5": "Public contract unchanged or backward-compatible with tests",
+        "4": "Compatible but tests/docs incomplete",
+        "3": "Minor compatible expansion",
+        "2": "Material compatibility risk",
+        "1": "Localized consumer migration risk",
+        "0": "Breaking public contract without migration"
+      },
+      "StateAndLifecycleOwnership": {
+        "5": "Clear owner and lifecycle with tests or enforcement where relevant",
+        "4": "Owner clear but not enforced/documented",
+        "3": "Minor ownership ambiguity",
+        "2": "Material ownership/lifecycle risk",
+        "1": "Localized duplicate ownership",
+        "0": "Leaked state, uncontrolled global mutable state, lifecycle hazard, or unverified high-risk state change"
+      },
+      "RegressionSafety": {
+        "5": "Affected regression tests or equivalent verification exists",
+        "4": "Test plan exists but is not automated",
+        "3": "Low-risk change with limited verification",
+        "2": "Medium-risk change missing direct regression test",
+        "1": "High-risk change partially verified",
+        "0": "High-risk change unverified"
+      },
+      "AbstractionFit": {
+        "5": "Abstraction is necessary and bounded",
+        "4": "Abstraction fits but lacks documented rationale",
+        "3": "Minor abstraction uncertainty",
+        "2": "Speculative abstraction risk",
+        "1": "Localized unnecessary abstraction",
+        "0": "Abstraction hides boundary violation or creates broad coupling"
+      }
+    },
+    "verdict_rules": [
+      "Any HIGH finding prevents PASS",
+      "Any required criterion scored 0 or 1 prevents PASS",
+      "Do not average scores unless explicitly requested",
+      "N-A is excluded from totals"
+    ]
+  },
   "final_verdict": [
     "PASS",
     "PASS_WITH_WARNINGS",

@@ -9,7 +9,8 @@ When planning a change:
 2) build Architecture Impact.
 3) check dependency direction and state ownership.
 4) include regression test requirements.
-5) output report in core/reports/ARCHITECTURE_GUARDIAN_REPORT.md format.
+5) for REVIEW/CHANGE-REVIEW/REFACTOR/FULL-AUDIT, include evidence-based Scorecard using 0-5 or N-A.
+6) output formal reports in core/reports/ARCHITECTURE_GUARDIAN_REPORT.md format.
 ```
 
 참조:

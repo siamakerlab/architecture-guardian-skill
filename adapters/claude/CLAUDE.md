@@ -9,7 +9,8 @@ Use this as a short pointer in a project's top-level `CLAUDE.md`.
 4. After significant change, run `core/modes/CHANGE-REVIEW.md`.
 5. Weekly or release boundary checkpoint: run FULL-AUDIT mode template.
 6. Every report must follow `core/reports/ARCHITECTURE_GUARDIAN_REPORT.md`.
-7. Keep output focused on required architecture judgment: impact, findings, required tests, and verdict.
+7. REVIEW, CHANGE-REVIEW, REFACTOR, and FULL-AUDIT outputs must include evidence-based Scorecard with `0-5` or `N-A`.
+8. Keep output focused on required architecture judgment: impact, scorecard, findings, required tests, and verdict.
 
 ## Do not copy
 Do not paste the full Architecture Guardian policy into `CLAUDE.md`. Keep the project management document short and point to the single policy source.

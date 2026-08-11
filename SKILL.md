@@ -69,12 +69,31 @@ Read the full core policy when:
 Every mode must include:
 
 - Architecture Impact
+- Scorecard for REVIEW, CHANGE-REVIEW, REFACTOR, and FULL-AUDIT
 - Findings, if any
 - Regression Risk
 - Tests Required
 - Architecture Verdict: `PASS`, `PASS WITH WARNINGS`, or `CHANGES REQUIRED`
 
 Use `core/reports/ARCHITECTURE_GUARDIAN_REPORT.md` as the report shape when the user asks for a formal report.
+
+## Scoring
+
+When a mode requires a scorecard, score each applicable item with the fixed rubric:
+
+- `5`: Verified pass. Evidence shows no violation and the relevant test, contract, or enforcement boundary is present where applicable.
+- `4`: Pass. Evidence shows no violation, but enforcement or documentation is incomplete.
+- `3`: Warning. Evidence shows a localized weakness without boundary, contract, lifecycle, state ownership, or regression breakage.
+- `2`: Risk. Evidence shows material architecture risk or missing verification in a medium-risk affected area.
+- `1`: Serious risk. Evidence shows a localized violation or partial verification of a high-risk affected area.
+- `0`: Fail. Evidence shows a severe violation, or a high-risk affected area is unverified.
+- `N-A`: Not scored. The item is outside the change or review scope.
+
+Do not use decimal scores, confidence scores, or subjective estimates. Each numeric score must cite concrete evidence such as a file, module, dependency edge, public contract, state owner, test, or missing verification.
+
+High-risk affected area means any affected area with a HIGH finding, regression risk HIGH, or changes to public contract, state ownership, persistence format, concurrency behavior, lifecycle behavior, security boundary, or cross-feature dependency. Medium-risk affected area means a changed area with MEDIUM finding, dependency broadening, public API growth, shared/common code growth, reduced testability, or unclear side effects.
+
+Use the evidence matrix in `core/policy/ARCHITECTURE_GUARDIAN_POLICY.md` when a score is disputed or ambiguous.
 
 ## Findings Policy
 
@@ -132,7 +151,7 @@ Recommended pointer:
 Use Architecture Guardian for architecture-sensitive work.
 Policy source: core/policy/ARCHITECTURE_GUARDIAN_POLICY.md
 Required flow: PLAN before implementation, REVIEW during/after implementation, CHANGE-REVIEW for diffs or PRs.
-Every result must include Architecture Impact, Findings, Tests Required, and Architecture Verdict.
+Review results must include Architecture Impact, Scorecard, Findings, Tests Required, and Architecture Verdict.
 ```
 
 ## Resource Map
