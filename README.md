@@ -155,6 +155,32 @@ Validate after install:
 python3 /path/to/skill-creator/scripts/quick_validate.py "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
 ```
 
+## Public Distribution
+
+This repository is intended to be consumed directly from GitHub.
+
+Recommended distribution channels:
+
+- GitHub repository clone for current `main`
+- GitHub release tag for stable installs
+- Project-level pointers through `AGENTS.md` and `CLAUDE.md`
+
+Stable install:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+git clone --branch v1.0.0 git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+Install current main:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+git clone git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+For teams, prefer a tagged release for shared environments and `main` only for active evaluation.
+
 ## Update
 
 If the skill was installed as a git checkout:
@@ -184,6 +210,12 @@ The machine-readable architecture policy has its own `policy_version` in [core/p
 Versioning policy:
 
 - [VERSIONING.md](VERSIONING.md)
+
+Release notes:
+
+- [CHANGELOG.md](CHANGELOG.md)
+
+This repository uses GitHub as the single canonical remote.
 
 ## Claude Code Usage
 

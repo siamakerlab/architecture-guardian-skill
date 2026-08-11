@@ -193,6 +193,8 @@ Do not overwrite user-local modifications without explicit approval.
 
 For versioned installs or release maintenance, follow `VERSIONING.md`. Use git tags as the release source of truth. Do not add a version field to `SKILL.md` frontmatter.
 
+Use GitHub as the single canonical remote. Do not introduce a mirror remote unless the user explicitly requests one.
+
 ## Resource Map
 
 - Core policy: `core/policy/ARCHITECTURE_GUARDIAN_POLICY.md`

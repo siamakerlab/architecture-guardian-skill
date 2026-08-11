@@ -7,6 +7,7 @@ The skill runtime does not store a release version in `SKILL.md`. Codex skill fr
 ## Version Sources
 
 - Repository release version: git tag, formatted as `vMAJOR.MINOR.PATCH`
+- Release notes: GitHub Releases and `CHANGELOG.md`
 - Policy semantics version: `core/policy/ARCHITECTURE_GUARDIAN_RULESET.json` field `policy_version`
 - Runtime entry point: `SKILL.md`, without a separate version field
 
@@ -14,10 +15,12 @@ The repository release version and `policy_version` do not have to change togeth
 
 ## Current Version State
 
-- Released tag: none yet
-- Current policy version: `1.0.0`
+- Released tag: check with `git tag --list --sort=-version:refname | head -1`
+- Current policy version: check `core/policy/ARCHITECTURE_GUARDIAN_RULESET.json` field `policy_version`
 
 Create the first release tag when the skill is ready to be consumed as a stable external dependency.
+
+Do not treat this document as the source of the current released version. Tags and the ruleset file are the source of truth.
 
 ## Versioning Rules
 
@@ -117,7 +120,7 @@ python3 -m json.tool core/policy/ARCHITECTURE_GUARDIAN_RULESET.json >/dev/null
 7. Check for obsolete mode names or banned wording:
 
 ```bash
-rg -n 'CHANGE_REVIEW|FULL_AUDIT|compact|경량|concise mode' . -g '!/.git/**'
+rg -n 'CHANGE_REVIEW|FULL_AUDIT|compact|경량|concise mode' . -g '!/.git/**' -g '!.github/**' -g '!VERSIONING.md'
 ```
 
 8. Commit the release changes.
@@ -127,12 +130,23 @@ rg -n 'CHANGE_REVIEW|FULL_AUDIT|compact|경량|concise mode' . -g '!/.git/**'
 git tag -a vMAJOR.MINOR.PATCH -m "vMAJOR.MINOR.PATCH"
 ```
 
-10. Push the branch and tags:
+10. Push the branch and tags to the canonical GitHub remote:
 
 ```bash
 git push github main
 git push github --tags
 ```
+
+11. Confirm the local branch and canonical remote point to the same release commit:
+
+```bash
+git fetch github --prune
+git rev-list --left-right --count main...github/main
+```
+
+The command should return `0 0`.
+
+12. Publish GitHub Release notes using `CHANGELOG.md` as the source.
 
 ## Update Rules For Agents
 
@@ -153,6 +167,8 @@ git@github.com:siamakerlab/architecture-guardian-skill.git
 8. Report the resulting commit and latest tag if available.
 
 Do not overwrite user-local modifications silently.
+
+This repository uses GitHub as the single canonical remote. Do not introduce a mirror remote unless the user explicitly requests one.
 
 ## Recommended User Prompts
 
