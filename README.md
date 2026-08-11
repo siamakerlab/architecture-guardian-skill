@@ -128,6 +128,25 @@ Adapter:
 
 - [adapters/codex/AGENTS.md](adapters/codex/AGENTS.md)
 
+## Distribution
+
+Canonical repository:
+
+- `git@github.com:siamakerlab/architecture-guardian-skill.git`
+
+Latest stable release:
+
+- `v1.0.2`
+- https://github.com/siamakerlab/architecture-guardian-skill/releases/tag/v1.0.2
+
+Recommended channels:
+
+- GitHub release tag for stable installs
+- GitHub `main` branch for active evaluation
+- Project-level pointers through `AGENTS.md` and `CLAUDE.md`
+
+For teams, prefer a tagged release for shared environments and `main` only for active evaluation.
+
 ## Install
 
 Canonical repository:
@@ -142,34 +161,11 @@ Recommended Codex install path:
 ${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian
 ```
 
-Install from GitHub:
-
-```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-git clone git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
-```
-
-Validate after install:
-
-```bash
-python3 /path/to/skill-creator/scripts/quick_validate.py "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
-```
-
-## Public Distribution
-
-This repository is intended to be consumed directly from GitHub.
-
-Recommended distribution channels:
-
-- GitHub repository clone for current `main`
-- GitHub release tag for stable installs
-- Project-level pointers through `AGENTS.md` and `CLAUDE.md`
-
 Stable install:
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-git clone --branch v1.0.1 git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+git clone --branch v1.0.2 git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
 ```
 
 Install current main:
@@ -179,25 +175,77 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 git clone git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
 ```
 
-For teams, prefer a tagged release for shared environments and `main` only for active evaluation.
+Install a specific version:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+git clone --branch <version> git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+Example:
+
+```bash
+git clone --branch v1.0.2 git@github.com:siamakerlab/architecture-guardian-skill.git "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+Validate after install when the validator is available:
+
+```bash
+cd "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+python3 scripts/validate.py
+```
 
 ## Update
 
-If the skill was installed as a git checkout:
+Update a `main` install:
 
 ```bash
 cd "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
 git status --short
-git pull --ff-only
+git pull --ff-only origin main
 ```
 
 If local changes exist, review them before pulling. Do not overwrite local modifications unless the user explicitly asks.
+
+Update a tagged install to the latest stable release:
+
+```bash
+cd "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+git fetch --tags
+git checkout v1.0.2
+```
+
+Update to a specific version:
+
+```bash
+cd "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+git fetch --tags
+git checkout <version>
+```
 
 Agent update request:
 
 ```text
 Update $architecture-guardian from git@github.com:siamakerlab/architecture-guardian-skill.git and validate the skill.
 ```
+
+## Uninstall
+
+Remove the installed skill directory:
+
+```bash
+rm -rf "${CODEX_HOME:-$HOME/.codex}/skills/architecture-guardian"
+```
+
+If a target project has management document pointers, remove the Architecture Guardian section from:
+
+- `AGENTS.md`
+- `CLAUDE.md`
+- `docs/ARCHITECTURE.md`
+- `docs/MODULE_RULES.md`
+- `docs/DEPENDENCY_RULES.md`
+
+Do not remove project-specific architecture rules unless they were created only for this skill and are no longer used.
 
 ## Versioning
 

@@ -108,7 +108,7 @@ Before creating a release tag:
 5. Validate the skill package:
 
 ```bash
-python3 /path/to/skill-creator/scripts/quick_validate.py .
+python3 scripts/validate.py
 ```
 
 6. Validate the machine-readable rules:

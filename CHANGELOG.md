@@ -6,6 +6,14 @@ This project follows Semantic Versioning for release tags.
 
 No unreleased changes.
 
+## v1.0.2
+
+Patch release for standalone skill validation.
+
+- Removes dependency on external skill validators from install and release guidance.
+- Adds `scripts/validate.py` as the repository-owned validation command.
+- Updates GitHub Actions to use the repository-owned validator.
+
 ## v1.0.1
 
 Patch release for public distribution cleanup.

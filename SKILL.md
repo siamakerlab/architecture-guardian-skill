@@ -187,7 +187,7 @@ Update procedure:
 3. If the repository matches and local changes exist, report them before updating.
 4. If there are no local changes, run `git pull --ff-only`.
 5. If the installed copy is not a git checkout, replace it from a fresh clone of the canonical repository after preserving any local project-specific files outside the skill directory.
-6. Validate with `python3 <skill-creator>/scripts/quick_validate.py <skill-dir>` when that validator is available.
+6. Validate with `python3 scripts/validate.py` from the skill repository checkout when validation is requested.
 
 Do not overwrite user-local modifications without explicit approval.
 
