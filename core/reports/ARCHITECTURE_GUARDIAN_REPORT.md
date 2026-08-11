@@ -14,6 +14,12 @@
 ## Dependency Impact
 - 추가/제거 dependency, 방향성, cycle
 
+## Evidence Sources
+- documents: `<files checked>`
+- source: `<files/modules checked>`
+- tools: `<static search / dependency graph / code graph / build/lint/tests>`
+- gaps: `<unavailable tooling or unverified area>`
+
 ## Scorecard (review modes)
 
 Required for REVIEW, CHANGE-REVIEW, REFACTOR, and FULL-AUDIT. For PLAN formal reports, omit this section unless the user explicitly asks for a planning scorecard.

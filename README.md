@@ -63,6 +63,12 @@ Every Architecture Guardian result should include:
 - `Tests Required`
 - `Architecture Verdict`: `PASS`, `PASS WITH WARNINGS`, or `CHANGES REQUIRED`
 
+## Evidence Model
+
+Architecture findings must be grounded in concrete evidence, not style preference. Use project documents, source reads, static search, tests/build/lint configuration, and dependency or code graph tooling when available. Graph or search output is a discovery aid; HIGH and MEDIUM findings must be cross-checked against source, tests, project rules, or public contracts before reporting.
+
+Common drift signals include repeated service locator use from high-level code, process-wide mutable singleton state, large mixed-responsibility files, public API growth, disabled architecture/lint gates, and cross-layer imports. Classify severity by boundary impact, state ownership, regression risk, and testability.
+
 ## Scorecard
 
 Reviews use a fixed evidence-based scorecard, not subjective ratings:

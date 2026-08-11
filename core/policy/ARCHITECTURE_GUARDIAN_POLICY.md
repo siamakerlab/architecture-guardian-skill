@@ -64,7 +64,23 @@ If similar role documents exist with other names, discover them and include.
 If not found, do not invent project rules.
 If docs conflict with code, report as `HIGH` and continue with evidence.
 
-## 6. Change Impact Analysis (mandatory)
+## 6. Evidence Gathering and Cross-Checks
+Architecture findings must be evidence-backed. Use the cheapest reliable sources first, then escalate when risk is unclear.
+
+Evidence sources:
+- project documents and explicit architecture rules
+- source reads for affected files or representative hotspots
+- static search for imports, service locator usage, singleton/global mutable state, public API expansion, and large low-cohesion files
+- dependency graph, code graph, module graph, or build graph tools when available
+- tests, build/lint configuration, and CI enforcement
+
+Rules:
+- Do not rely on graph or static-tool output alone for a HIGH or MEDIUM finding.
+- Cross-check tool output against actual source, tests, project rules, or public contracts.
+- When code-review graph tooling is available, use it for REVIEW, CHANGE-REVIEW, and FULL-AUDIT to identify communities, bridge nodes, impact radius, and coupling hotspots. If unavailable, continue with source reads and static search, and state the tooling gap.
+- Treat repeated direct service locator calls, process-wide mutable singletons, large mixed-responsibility files, and disabled architecture/lint gates as architecture drift signals. They are not automatically HIGH; classify by boundary impact, state ownership, regression risk, and testability.
+
+## 7. Change Impact Analysis (mandatory)
 For all planned or requested changes evaluate:
 - changed modules/classes/interfaces/public contracts
 - state ownership and lifecycle changes
@@ -79,7 +95,7 @@ For all planned or requested changes evaluate:
 
 Do not assume single-file impact.
 
-## 7. Change Isolation Principle
+## 8. Change Isolation Principle
 Prefer extension over modification of stable regions.
 Do not use this as an excuse to build endless adapter/helper layers.
 If adaptation creates architectural mismatch, request explicit refactor path.
@@ -93,7 +109,7 @@ If direct change is needed, document:
 - required tests
 - migration plan
 
-## 8. Dependency Rules
+## 9. Dependency Rules
 - Do not directly depend on another feature's internal implementation.
 - Depend on contracts/interfaces before implementations.
 - Do not let infrastructure leak into domain/application logic.
@@ -115,7 +131,7 @@ Project explicit architecture rules have priority unless they create severe risk
 
 In severe cases, report and propose safe alternative.
 
-## 9. Feature Planning Flow (mandatory order)
+## 10. Feature Planning Flow (mandatory order)
 Requirement -> Existing Architecture Discovery -> Relevant Code Discovery -> Impact Analysis -> Dependency Analysis -> Contract Design -> State Ownership -> Regression Analysis -> Test Strategy -> Implementation Plan
 
 Include at least:
@@ -130,7 +146,7 @@ Include at least:
 - regression protection and migration
 - removable dead code
 
-## 10. Implementation Review Checklist
+## 11. Implementation Review Checklist
 ### High severity checks
 - Module boundary violations
 - Layer violations
@@ -166,7 +182,7 @@ Include at least:
 
 Low severity findings do not justify large refactors.
 
-## 11. Regression Risk Analysis
+## 12. Regression Risk Analysis
 Flag any change requiring explicit test evidence when it touches:
 - existing behavior
 - API signatures
@@ -180,7 +196,7 @@ Flag any change requiring explicit test evidence when it touches:
 
 Regression-risky changes cannot be marked complete without tests.
 
-## 12. Abstraction Policy
+## 13. Abstraction Policy
 Do not add abstraction only for visual cleanliness.
 Add contract only when:
 - change likelihood is real
@@ -189,7 +205,7 @@ Add contract only when:
 
 Prefer explicit YAGNI boundary.
 
-## 13. Shared/Common Code Policy
+## 14. Shared/Common Code Policy
 Shared code must have strong shared ownership logic.
 Validate:
 - true shared responsibility
@@ -198,7 +214,7 @@ Validate:
 
 Prefer limited duplication over risky over-generalization.
 
-## 14. Refactoring Policy
+## 15. Refactoring Policy
 Prefer small, sequenced changes:
 1) protect behavior tests
 2) structural micro-step
@@ -210,7 +226,7 @@ Prefer small, sequenced changes:
 
 Avoid large rewrites by default.
 
-## 15. Architecture Drift Detection
+## 16. Architecture Drift Detection
 Detect new:
 - reversed dependency directions
 - new cross-feature dependencies
@@ -221,9 +237,16 @@ Detect new:
 - dependency cycles
 - convention drift
 
+Also detect accumulated drift:
+- repeated service locator or global singleton access from UI/application policy
+- process-wide mutable state with more than one owner or lifecycle trigger
+- feature screens or services that combine UI, state, persistence, network, and orchestration responsibilities
+- large files or classes whose size hides mixed responsibility
+- disabled architecture, navigation, lint, or dependency gates without a dated reason or replacement test
+
 Treat small changes as future precedent.
 
-## 16. Post-change Self Review
+## 17. Post-change Self Review
 Ask explicitly:
 - Did we increase coupling?
 - Did we cross stable module boundary?
@@ -240,10 +263,10 @@ Ask explicitly:
 
 If answered negatively with evidence, proceed to report.
 
-## 17. Reporting (required)
+## 18. Reporting (required)
 Every output must include Architecture Impact, Findings when present, Regression Risk, Tests Required, and final verdict. REVIEW, CHANGE-REVIEW, REFACTOR, and FULL-AUDIT outputs must also include Scorecard. Formal reports must follow the report template.
 
-## 18. Scoring Policy
+## 19. Scoring Policy
 
 Review modes must include an evidence-based scorecard. Scores are not subjective ratings; they are deterministic judgments from observed evidence.
 
@@ -300,7 +323,7 @@ Score evidence matrix:
 - Regression Safety: `5` requires affected regression tests or equivalent verification; `4` means test plan exists but not automated; `3` means low-risk change with limited verification; `2` means medium-risk change missing direct regression test; `1` means high-risk change partially verified; `0` means high-risk change unverified.
 - Abstraction Fit: `5` requires abstraction is necessary and bounded; `4` means abstraction fits but lacks documented rationale; `3` means minor abstraction uncertainty; `2` means speculative abstraction risk; `1` means localized unnecessary abstraction; `0` means abstraction hides boundary violation or creates broad coupling.
 
-## 19. Mode requirements
+## 20. Mode requirements
 - PLAN: pre-change planning with explicit architecture impact section.
 - REVIEW: detect violations in current implementation against local architecture.
 - CHANGE-REVIEW: analyze diff/commit/PR impact.
@@ -312,7 +335,7 @@ The report verdict must be:
 - PASS WITH WARNINGS
 - CHANGES REQUIRED
 
-## 20. Output Discipline
+## 21. Output Discipline
 
 모든 모드 출력은 판단에 필요한 정보만 포함한다. 목표는 축약 버전과 상세 버전을 나누는 것이 아니라, 처음부터 운영 가능한 기본 형식을 유지하는 것이다.
 

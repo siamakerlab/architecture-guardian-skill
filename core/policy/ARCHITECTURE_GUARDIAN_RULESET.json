@@ -31,6 +31,19 @@
     "docs/DEPENDENCY_RULES.md",
     "CONTRIBUTING.md"
   ],
+  "evidence_sources": [
+    "project_documents",
+    "source_reads",
+    "static_search",
+    "dependency_graph",
+    "code_graph",
+    "tests",
+    "build_lint_ci_configuration"
+  ],
+  "cross_check_required_for": [
+    "HIGH",
+    "MEDIUM"
+  ],
   "required_check_categories": {
     "high": [
       "ModuleBoundaryViolation",
@@ -64,6 +77,15 @@
       "SmallDuplication"
     ]
   },
+  "drift_signals": [
+    "RepeatedServiceLocatorUse",
+    "ProcessWideMutableSingletonState",
+    "OversizedLowCohesionFile",
+    "DisabledArchitectureOrLintGate",
+    "CrossLayerImport",
+    "PublicApiGrowth",
+    "HiddenDependency"
+  ],
   "regression_gate": {
     "must_test_when": [
       "behavior_change",

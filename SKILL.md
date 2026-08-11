@@ -28,6 +28,18 @@ Before planning or reviewing a change, inspect existing project guidance if pres
 
 Also check similarly named architecture, module, dependency, or contribution documents. Do not invent project rules when documents are missing.
 
+## Evidence Gathering
+
+Ground findings in concrete evidence, not architecture preference alone. Use the cheapest reliable sources first:
+
+- project documents and explicit architecture rules
+- source reads for affected files or representative hotspots
+- static search for dependency direction, global mutable state, service locator use, public API growth, and large low-cohesion files
+- dependency graph or code graph tools when available
+- tests, build/lint configuration, and CI gates
+
+Graph or static-tool output is discovery evidence, not the final verdict. Cross-check every HIGH or MEDIUM finding against actual source, tests, project rules, or public contracts before reporting it.
+
 ## Core Priority
 
 Apply these in order:
