@@ -18,20 +18,22 @@
 
 Required for REVIEW, CHANGE-REVIEW, REFACTOR, and FULL-AUDIT. For PLAN formal reports, omit this section unless the user explicitly asks for a planning scorecard.
 
-| Criterion | Score | Evidence |
-|---|---:|---|
-| Encapsulation | `<0-5/N-A>` | `<file/module/contract/state evidence>` |
-| Coupling | `<0-5/N-A>` | `<dependency evidence>` |
-| Cohesion | `<0-5/N-A>` | `<responsibility evidence>` |
-| Explicit Dependencies | `<0-5/N-A>` | `<DI/import/contract evidence>` |
-| Single Responsibility | `<0-5/N-A>` | `<responsibility evidence>` |
-| Dependency Inversion | `<0-5/N-A>` | `<interface/implementation evidence>` |
-| Testability | `<0-5/N-A>` | `<test seam/coverage evidence>` |
-| Boundary Integrity | `<0-5/N-A>` | `<module/layer/feature evidence>` |
-| Contract Compatibility | `<0-5/N-A>` | `<API/public contract evidence>` |
-| State and Lifecycle Ownership | `<0-5/N-A>` | `<state/lifecycle evidence>` |
-| Regression Safety | `<0-5/N-A>` | `<test/regression evidence>` |
-| Abstraction Fit | `<0-5/N-A>` | `<abstraction/YAGNI evidence>` |
+Summary: `5:<n> 4:<n> 3:<n> 2:<n> 1:<n> 0:<n> N-A:<n>`
+
+| Criterion | Score | Status | Evidence | Action |
+|---|---:|---|---|---|
+| Encapsulation | `<0-5/N-A>` | `<Verified/Pass/Warning/Risk/Serious/Fail/Not scored>` | `<file/module/contract/state evidence>` | `<none/fix/test/document>` |
+| Coupling | `<0-5/N-A>` | `<status>` | `<dependency evidence>` | `<action>` |
+| Cohesion | `<0-5/N-A>` | `<status>` | `<responsibility evidence>` | `<action>` |
+| Explicit Dependencies | `<0-5/N-A>` | `<status>` | `<DI/import/contract evidence>` | `<action>` |
+| Single Responsibility | `<0-5/N-A>` | `<status>` | `<responsibility evidence>` | `<action>` |
+| Dependency Inversion | `<0-5/N-A>` | `<status>` | `<interface/implementation evidence>` | `<action>` |
+| Testability | `<0-5/N-A>` | `<status>` | `<test seam/coverage evidence>` | `<action>` |
+| Boundary Integrity | `<0-5/N-A>` | `<status>` | `<module/layer/feature evidence>` | `<action>` |
+| Contract Compatibility | `<0-5/N-A>` | `<status>` | `<API/public contract evidence>` | `<action>` |
+| State and Lifecycle Ownership | `<0-5/N-A>` | `<status>` | `<state/lifecycle evidence>` | `<action>` |
+| Regression Safety | `<0-5/N-A>` | `<status>` | `<test/regression evidence>` | `<action>` |
+| Abstraction Fit | `<0-5/N-A>` | `<status>` | `<abstraction/YAGNI evidence>` | `<action>` |
 
 Scoring: `5` verified pass, `4` pass with incomplete enforcement/docs, `3` localized warning, `2` material risk, `1` serious risk, `0` fail, `N-A` outside scope and not scored. Do not use subjective, decimal, percentage, or confidence scores.
 

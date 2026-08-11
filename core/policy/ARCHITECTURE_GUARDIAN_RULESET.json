@@ -114,6 +114,26 @@
       "confidence",
       "subjective_estimate"
     ],
+    "display": {
+      "summary": "Show counts for 5, 4, 3, 2, 1, 0, and N-A before the scorecard table",
+      "columns": [
+        "Criterion",
+        "Score",
+        "Status",
+        "Evidence",
+        "Action"
+      ],
+      "no_average_by_default": true,
+      "status_by_score": {
+        "5": "Verified",
+        "4": "Pass",
+        "3": "Warning",
+        "2": "Risk",
+        "1": "Serious",
+        "0": "Fail",
+        "N-A": "Not scored"
+      }
+    },
     "criteria": [
       "Encapsulation",
       "Coupling",

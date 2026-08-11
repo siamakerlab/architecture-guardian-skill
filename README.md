@@ -77,6 +77,8 @@ Reviews use a fixed evidence-based scorecard, not subjective ratings:
 
 Scores must cite concrete evidence such as files, modules, dependency edges, public contracts, state owners, tests, or missing verification. Decimal scores, percentages, confidence scores, and subjective estimates are not used.
 
+Scorecards are shown as a table with `Criterion`, `Score`, `Status`, `Evidence`, and `Action`, preceded by a short count summary. Averages are not shown unless explicitly requested.
+
 Formal report template:
 
 - [ARCHITECTURE_GUARDIAN_REPORT.md](core/reports/ARCHITECTURE_GUARDIAN_REPORT.md)

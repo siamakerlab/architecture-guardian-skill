@@ -95,6 +95,8 @@ High-risk affected area means any affected area with a HIGH finding, regression 
 
 Use the evidence matrix in `core/policy/ARCHITECTURE_GUARDIAN_POLICY.md` when a score is disputed or ambiguous.
 
+Show scorecards as a table with columns: `Criterion`, `Score`, `Status`, `Evidence`, `Action`. Include a short score summary before the table: `5`, `4`, `3`, `2`, `1`, `0`, `N-A` counts. Do not show an average unless explicitly requested.
+
 ## Findings Policy
 
 Always report all HIGH findings. Report MEDIUM findings that materially affect design, regression risk, or maintainability. LOW findings should not drive broad refactors and may be omitted unless requested.

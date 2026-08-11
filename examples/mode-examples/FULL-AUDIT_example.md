@@ -8,14 +8,16 @@
 
 ## Scorecard
 
-| Criterion | Score | Evidence |
-|---|---:|---|
-| Encapsulation | 5 | no cross-module state leak found |
-| Coupling | 3 | shared formatting contains feature-specific logic |
-| Cohesion | 3 | formatting responsibility is mixed across feature concerns |
-| Boundary Integrity | 5 | no reversed dependency or cycle found |
-| Contract Compatibility | 3 | admin public API increased by 3 entries |
-| Regression Safety | 2 | smoke regression required for shared formatting split |
+Summary: `5:2 4:0 3:3 2:1 1:0 0:0 N-A:0`
+
+| Criterion | Score | Status | Evidence | Action |
+|---|---:|---|---|---|
+| Encapsulation | 5 | Verified | no cross-module state leak found | None |
+| Coupling | 3 | Warning | shared formatting contains feature-specific logic | Split feature-specific formatter |
+| Cohesion | 3 | Warning | formatting responsibility is mixed across feature concerns | Separate feature rules |
+| Boundary Integrity | 5 | Verified | no reversed dependency or cycle found | None |
+| Contract Compatibility | 3 | Warning | admin public API increased by 3 entries | Review API necessity |
+| Regression Safety | 2 | Risk | smoke regression required for shared formatting split | Add smoke regression |
 
 ## Findings
 

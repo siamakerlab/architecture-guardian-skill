@@ -262,6 +262,8 @@ Rules:
 - If evidence is insufficient for an affected high-risk area, score `0`.
 - If an item is truly outside scope, score `N-A` and exclude it from totals.
 - Do not average scores into a single architecture score unless the user explicitly asks.
+- Show scorecards as `Criterion | Score | Status | Evidence | Action`.
+- Include a score summary with counts for `5`, `4`, `3`, `2`, `1`, `0`, and `N-A`.
 - Any `0` or `1` in a required architecture criterion prevents `PASS`.
 - Any HIGH finding prevents `PASS`.
 

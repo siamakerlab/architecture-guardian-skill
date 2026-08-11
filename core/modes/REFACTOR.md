@@ -27,6 +27,8 @@
 
 7) Scorecard
 - 각 기준은 `0~5`만 사용하고, 범위 밖 항목은 `N-A`
+- 표는 `Criterion | Score | Status | Evidence | Action` 형식
+- 표 위에 `5/4/3/2/1/0/N-A` count summary 표시
 - 리팩터링 후 구조가 기존보다 나빠진 항목은 `0`
 - 동작 보존 근거가 없는 고위험 항목은 `0`
 

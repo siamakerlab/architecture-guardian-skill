@@ -5,14 +5,16 @@
 
 ## Scorecard
 
-| Criterion | Score | Evidence |
-|---|---:|---|
-| Encapsulation | 0 | `AuthOrchestrator` receives `UserRepositoryImpl` directly |
-| Coupling | 0 | auth feature depends on user feature implementation |
-| Cohesion | 3 | formatting and caching responsibility are mixed in shared utility without confirmed boundary breakage |
-| Explicit Dependencies | 2 | dependency exists but contract boundary is not explicit |
-| Dependency Inversion | 0 | implementation is injected instead of port/interface |
-| Regression Safety | 2 | adapter integration test is required before completion |
+Summary: `5:0 4:0 3:1 2:2 1:0 0:3 N-A:0`
+
+| Criterion | Score | Status | Evidence | Action |
+|---|---:|---|---|---|
+| Encapsulation | 0 | Fail | `AuthOrchestrator` receives `UserRepositoryImpl` directly | Introduce feature contract |
+| Coupling | 0 | Fail | auth feature depends on user feature implementation | Replace with port dependency |
+| Cohesion | 3 | Warning | formatting and caching are mixed without confirmed boundary breakage | Split if change continues |
+| Explicit Dependencies | 2 | Risk | dependency exists but contract boundary is not explicit | Define dependency contract |
+| Dependency Inversion | 0 | Fail | implementation is injected instead of port/interface | Invert dependency |
+| Regression Safety | 2 | Risk | adapter integration test is required before completion | Add integration test |
 
 ## Findings
 

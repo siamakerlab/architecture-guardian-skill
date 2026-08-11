@@ -26,6 +26,8 @@
 
 ### 6) Scorecard
 - 각 기준은 `0~5`만 사용하고, 범위 밖 항목은 `N-A`
+- 표는 `Criterion | Score | Status | Evidence | Action` 형식
+- 표 위에 `5/4/3/2/1/0/N-A` count summary 표시
 - 숫자 점수는 구체 증거가 있을 때만 부여
 - 고위험 영향 영역의 검증 근거가 없으면 `0`
 - 기준: Encapsulation, Coupling, Cohesion, Explicit Dependencies, Single Responsibility, Dependency Inversion, Testability, Boundary Integrity, Contract Compatibility, State and Lifecycle Ownership, Regression Safety, Abstraction Fit

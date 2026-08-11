@@ -26,6 +26,8 @@
 
 ### 6) Scorecard
 - repository-level 기준별 `0~5`, 범위 밖 항목은 `N-A`
+- 표는 `Criterion | Score | Status | Evidence | Action` 형식
+- 표 위에 `5/4/3/2/1/0/N-A` count summary 표시
 - 숫자 점수는 발견된 dependency, boundary, contract, state, test evidence와 연결
 - 증거 없는 추정 점수 금지
 
